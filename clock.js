@@ -13,13 +13,23 @@ class Clock {
         this.configCurrent = [0, 0];
         //stores the current configuration of the two lines as the actual degree 
         this.currentAngles = [0, 0];
+        this.currentIndex = 1000;
         //stores the previous configuration of the two lines as the actual degree (for animation) 
         this.prevAngles = [0, 0];
+        this.prevIndex = 1000;
         //stores all the configurations of the current clock for each digit
         this.config = state.config;
+
+        this.increment = 0;
+        this.incrementDivisor = 15;
+
+        this.lineThickness = this.size / 15;
     }
 
     show(index) {
+        if (this.prevIndex === 1000)
+            this.prevIndex = index;
+        this.currentIndex = index;
         push();
         //because the clock has to move with parent chunk of clocks
         translate(this.parentX, this.parentY);
@@ -33,7 +43,6 @@ class Clock {
         strokeWeight(this.size / 40);
         point(0, 0);
 
-        strokeWeight(this.size / 15);
         rotate(180); //to get the lines to point up by default
         this.line(0, index);
         this.line(1, index);
@@ -44,12 +53,31 @@ class Clock {
         push();
         stroke('orange');
 
-        if (i !== undefined) //to implement a bodged version of overloading
-            this.configCurrent = [this.config[i * 2], this.config[i * 2 + 1]];
+        this.configCurrent = this.getConfig(this.currentIndex);
+        this.currentAngles = this.getAngle(this.configCurrent);
 
-        this.currentAngles[num] = parseInt(this.configCurrent[num]) * 45;
-        rotate(this.currentAngles[num]);
-        line(0, 0, 0, this.size / 2.1);
+        this.setLineStroke();
+
+        if (this.currentIndex === this.prevIndex) {
+            // if (i !== undefined) //to implement a bodged version of overloading    
+            rotate(this.currentAngles[num]);
+            line(0, 0, 0, this.size / 2.1);
+        } else {
+            if (!this.increment) {
+                this.prevConfig = this.getConfig(this.prevIndex);
+                this.prevAngles = this.getAngle(this.prevConfig);
+            }
+
+            this.increment = (this.currentAngles[num] - this.prevAngles[num]) / this.incrementDivisor;
+            this.prevAngles[num] = (this.prevAngles[num] + this.increment) % 360;
+            rotate(this.prevAngles[num]);
+            line(0, 0, 0, this.size / 2.1);
+
+            if (this.prevAngles[num] === this.currentAngles[num]) {
+                this.prevIndex = this.currentIndex;
+                this.increment = 0;
+            }
+        }
         pop();
     }
 
@@ -72,7 +100,33 @@ class Clock {
         }
     }
 
+    getConfig(i) {
+        return [this.config[i * 2], this.config[i * 2 + 1]];
+    }
+
+    getAngle(n) {
+        return [parseInt(n[0]) * 45, parseInt(n[1] * 45)];
+    }
+
     getCurrentConfig() {
         return (this.configCurrent[0] + '' + this.configCurrent[1]);
+    }
+
+    setLineStroke() {
+        if (this.currentAngles[0] % 360 === 0 && this.currentAngles[1] % 360 === 0) {
+            if (this.lineThickness < 0.5) {
+                this.lineThickness = 0.5;
+            } else {
+                this.lineThickness -= 0.07;
+            }
+        } else {
+            if (this.lineThickness >= this.size / 15) {
+                this.lineThickness = this.size / 15;
+            } else {
+                this.lineThickness += 0.1;
+            }
+        }
+        strokeWeight(this.lineThickness);
+
     }
 }

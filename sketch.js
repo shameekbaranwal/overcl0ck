@@ -19,7 +19,7 @@ function draw() {
     background('#2B3350');
     let i = clocksConfig.labels.indexOf((floor(d) % 10)+'');
     digit.show(i);
-    d += 0.05;
+    d += 0.01;
 }
 
 function mousePressed() {
