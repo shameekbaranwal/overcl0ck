@@ -45,7 +45,7 @@ class Clock {
         stroke('orange');
 
         if (i !== undefined) //to implement a bodged version of overloading
-            this.configCurrent = [this.config[i], this.config[i + 1]];
+            this.configCurrent = [this.config[i * 2], this.config[i * 2 + 1]];
 
         this.currentAngles[num] = parseInt(this.configCurrent[num]) * 45;
         rotate(this.currentAngles[num]);
@@ -54,8 +54,9 @@ class Clock {
     }
 
     checkClick() {
-        if (dist(this.x + this.parentX, this.y + this.parentY, mouseX, mouseY) <= this.size / 2)
-            this.onClick();
+        if (dist(this.x + this.parentX, this.y + this.parentY, mouseX, mouseY) <= this.size / 2) {
+            // this.onClick();
+        }
     }
 
     onClick() {

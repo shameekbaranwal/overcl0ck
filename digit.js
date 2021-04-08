@@ -13,6 +13,7 @@ class Digit {
     }
 
     initializeClocks() {
+        let n = 0;
         for (let i = 0; i < this.columns; i++) {
             for (let j = 0; j < this.rows; j++) {
                 let x = i * this.size;
@@ -23,43 +24,49 @@ class Digit {
                     y,
                     parentX: this.x,
                     parentY: this.y,
-                    config: ''
+                    config: clocksConfig.data[n++]
                 };
                 this.clocks.push(new Clock(state));
             }
         }
     }
 
-    show() {
-        this.clocks.forEach(clock => clock.show());
+    show(index) {
+        this.clocks.forEach(clock => clock.show(index));
     }
 
     checkClick() {
         this.clocks.forEach(clock => clock.checkClick());
     }
 
-    keyClick(key) {
-        if (key === 's' || key === 'S') {
-            let configs = {
-                labels: [
-                    '0',
-                    '1',
-                    '2',
-                    '3',
-                    '4',
-                    '5',
-                    '6',
-                    '7',
-                    '8',
-                    '9',
-                ],
-                data: this.data
-            };
-            saveJSON(configs, "data");
-        }
+    // keyClick(key) {
+    //     if (key === 's' || key === 'S') {
+    //         let configs = {
+    //             labels: [
+    //                 '0',
+    //                 '1',
+    //                 '2',
+    //                 '3',
+    //                 '4',
+    //                 '5',
+    //                 '6',
+    //                 '7',
+    //                 '8',
+    //                 '9',
+    //             ],
+    //             data: this.data
+    //         };
+    //         saveJSON(configs, "data");
+    //     }
 
-        if (key === 'r' || key === 'R') {
-            this.clocks.forEach((clock, index) => this.data[index] = (this.data[index] || '') + clock.getCurrentConfig());
-        }
-    }
+    //     if (key === 'r' || key === 'R') {
+    //         this.clocks.forEach((clock, index) => this.data[index] = (this.data[index] || '') + clock.getCurrentConfig());
+    //         console.log(this.data);
+    //     }
+
+    //     if (key === 'd' || key === 'D') {
+    //         for(let i in this.data)
+    //             this.data[i] = this.data[i].substring(0, this.data[i].length - 2) || '';
+    //     }
+    // }
 }

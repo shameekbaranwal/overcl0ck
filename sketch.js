@@ -1,6 +1,11 @@
 let canv;
 let digit;
+let clocksConfig;
+let d = 0;
 
+function preload() {
+    clocksConfig = loadJSON('./data.json');
+}
 
 function setup() {
     canv = createCanvas(800, 600);
@@ -12,7 +17,9 @@ function setup() {
 
 function draw() {
     background('#2B3350');
-    digit.show();
+    let i = clocksConfig.labels.indexOf((floor(d) % 10)+'');
+    digit.show(i);
+    d += 0.05;
 }
 
 function mousePressed() {
