@@ -24,4 +24,4 @@ Then, since the length of this configuration string is 24, there are 12 possible
 Now, if the first state of your configuration corresponds to drawing, say, the letter `A`, then the value of the first element of that `label` array would be `'A'`, and so on. 
 
 A potential addition for this project can be a configuration-generator.html webpage wherein you can use a GUI to create the configuration.json for you.
-For now, however, 
+For now, however, we'll have to stick to manual configuration generation.
