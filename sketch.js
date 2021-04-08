@@ -4,7 +4,7 @@ let clocksConfig;
 let d = 0;
 
 function preload() {
-    clocksConfig = loadJSON('./data.json');
+    clocksConfig = loadJSON('./digitConfig.json');
 }
 
 function setup() {
@@ -19,15 +19,15 @@ function draw() {
     background('#2B3350');
     let i = clocksConfig.labels.indexOf((floor(d) % 10)+'');
     digit.show(i);
-    d += 0.01;
+    d += 0.02;
 }
 
 function mousePressed() {
-    digit.checkClick();
+    // digit.checkClick();
 }
 
 function keyPressed() {
-    digit.keyClick(key);
+    // digit.keyClick(key);
 }
 
 function windowResized() {
