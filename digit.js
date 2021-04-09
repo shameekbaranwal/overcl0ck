@@ -9,6 +9,7 @@ class Digit {
         this.columns = config.columns; //(6)
         this.clocks = [];
         this.data = [];
+        this.speed = config.speed;
         this.initializeClocks();
     }
 
@@ -24,7 +25,8 @@ class Digit {
                     y,
                     parentX: this.x,
                     parentY: this.y,
-                    config: clocksConfig.data[n++]
+                    config: clocksConfig.data[n++], 
+                    incrementDivisor: 5 * this.speed,
                 };
                 this.clocks.push(new Clock(state));
             }

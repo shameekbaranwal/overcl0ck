@@ -21,7 +21,7 @@ class Clock {
         this.config = state.config;
 
         this.increment = 0;
-        this.incrementDivisor = state.incrementDivisor || 15;
+        this.incrementDivisor = state.incrementDivisor;
 
         this.lineThickness = this.size / 15;
     }
