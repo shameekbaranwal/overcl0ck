@@ -21,7 +21,7 @@ class Clock {
         this.config = state.config;
 
         this.increment = 0;
-        this.incrementDivisor = 15;
+        this.incrementDivisor = state.incrementDivisor || 15;
 
         this.lineThickness = this.size / 15;
     }
@@ -34,9 +34,9 @@ class Clock {
         //because the clock has to move with parent chunk of clocks
         translate(this.parentX, this.parentY);
         translate(this.x, this.y)
-        fill('#56679F');
+        fill('#2B3350');
         stroke('#C2ADB3');
-        strokeWeight(this.size / 45);
+        strokeWeight(this.size / 60);
         ellipse(0, 0, this.size);
 
         stroke('#3B2B30');
@@ -59,10 +59,9 @@ class Clock {
         this.setLineStroke();
 
         if (this.currentIndex === this.prevIndex) {
-            // if (i !== undefined) //to implement a bodged version of overloading    
             rotate(this.currentAngles[num]);
             line(0, 0, 0, this.size / 2.1);
-        } else {
+        } else { //for animating between states
             if (!this.increment) {
                 this.prevConfig = this.getConfig(this.prevIndex);
                 this.prevAngles = this.getAngle(this.prevConfig);
