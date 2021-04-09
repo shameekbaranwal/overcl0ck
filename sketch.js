@@ -4,7 +4,16 @@ let clocksConfig;
 let hr, hrDigits = [],
     min, minDigits = [],
     sec, secDigits = [];
-let i
+let i;
+let CLOCKS_INVISIBLE = false;
+
+// let CLOCK_COLOUR = '#2B3350';
+let CLOCK_COLOUR = '#00000f';
+let BACKGROUND_COLOUR = '#00000f';
+// let LINE_COLOUR = '#FFCAE9';
+// let LINE_COLOUR = '#75E4B3';
+let LINE_COLOUR = '#ff4d4d';
+// let LINE_COLOUR = '#FFB17A';
 
 function preload() {
     clocksConfig = loadJSON('./digitConfig.json');
@@ -19,7 +28,7 @@ function setup() {
 }
 
 function draw() {
-    background('#2B3350');
+    background(BACKGROUND_COLOUR);
 
     drawHours();
     drawMinutes();
@@ -35,16 +44,20 @@ function windowResized() {
 
 function initialization() {
     angleMode(DEGREES);
+    document.bgColor = BACKGROUND_COLOUR;
     setupHours();
     setupMinutes();
     setupSeconds();
 }
 
-// function mousePressed() {
-//     hr++
-//     min++
-//     sec++
-// }
+function mousePressed() {
+    if (mouseButton === LEFT)
+        changeClockVisbility();
+}
+
+function changeClockVisbility() {
+    CLOCKS_INVISIBLE = !CLOCKS_INVISIBLE;
+}
 
 function setupHours() {
     let config = {
