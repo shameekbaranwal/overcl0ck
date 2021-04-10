@@ -8,6 +8,11 @@
     font-family: dot;
 }
 
+@font-face {
+    src: url(fonts/CascadiaCode.ttf);
+    font-family: cascadia;
+}
+
 
 h1,
 p {
@@ -25,7 +30,7 @@ h1 {
 }
 
 p {
-    font-family: 'Cascadia Code';
+    font-family: cascadia;
     color: rgba(211, 211, 211, 0.877);
     top: 3vh;
     font-size: 2vh;
@@ -39,4 +44,4 @@ p {
     transform: translate(-50%);
 }
 
-.themeButton {}
+/* .themeButton {} */
