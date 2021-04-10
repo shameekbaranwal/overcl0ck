@@ -34,9 +34,9 @@ function setup() {
         resizeCanvas(windowHeight * 1.33 * CANVAS_RATIO, windowHeight * CANVAS_RATIO);
     }
 
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 2;
-    canv.position(x, y);
+    // var x = (windowWidth - width) / 2;
+    // var y = (windowHeight - height) / 1.8;
+    // canv.position(x, y);
     initialization();
 }
 
@@ -53,11 +53,11 @@ function draw() {
 }
 
 
-function windowResized() {
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 2;
-    canv.position(x, y);
-}
+// function windowResized() {
+//     var x = (windowWidth - width) / 2;
+//     var y = (windowHeight - height) / 2;
+//     // canv.position(x, y);
+// }
 
 function initialization() {
     angleMode(DEGREES);
@@ -65,6 +65,8 @@ function initialization() {
     setupHours();
     setupMinutes();
     setupSeconds();
+
+    canv.parent('clock');
 }
 
 function mousePressed() {
