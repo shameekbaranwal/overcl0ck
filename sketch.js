@@ -85,8 +85,8 @@ function initialization() {
 
 function mousePressed() {
     if (mouseButton === LEFT) {
-        if (mouseX > width / 2) {
-            if (mouseY > height / 2) {
+        if (mouseX > width / 2 && mouseX < width) {
+            if (mouseY > height / 2 && mouseY < height) {
                 THEME++;
                 setTheme();
             } else {
