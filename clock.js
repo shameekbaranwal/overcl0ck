@@ -41,8 +41,8 @@ class Clock {
         translate(this.x, this.y);
 
         //drawing the clock
-        fill(CLOCK_COLOUR); //global
-        stroke('#C2ADB3'); //outline of the clock
+        fill(BACKGROUND_COLOUR); //global
+        stroke(CLOCK_COLOUR); //outline of the clock
         strokeWeight(this.size / 100);
         if (CLOCKS_INVISIBLE) {
             noStroke(); //outline of clock would not be drawn if clocks are invisible
@@ -134,7 +134,7 @@ class Clock {
                 this.lineThickness += normalize(0.1);
             }
         }
-        strokeWeight(this.lineThickness);
+        strokeWeight(this.lineThickness + this.lineThickness * 1.5 * MODE);
 
     }
 

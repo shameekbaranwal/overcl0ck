@@ -26,14 +26,14 @@ h1 {
     border-bottom: 1px solid grey;
     top: 2vh;
     font-family: dot;
-    font-size: 3.5vh;
+    font-size: 2vw;
 }
 
 p {
     font-family: cascadia;
     color: rgba(211, 211, 211, 0.877);
     top: 3vh;
-    font-size: 2vh;
+    font-size: 1vw;
 }
 
 #clock {
@@ -43,5 +43,3 @@ p {
     left: 50%;
     transform: translate(-50%);
 }
-
-/* .themeButton {} */

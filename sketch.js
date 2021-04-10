@@ -1,24 +1,30 @@
 let canv;
-// let digit;
+
 let clocksConfig;
+let configurations;
+
 let hr, hrDigits = [],
     min, minDigits = [],
     sec, secDigits = [];
 let i;
 let CLOCKS_INVISIBLE = false;
 
-// let CLOCK_COLOUR = '#2B3350';
-let CLOCK_COLOUR = '#00000f';
-let BACKGROUND_COLOUR = CLOCK_COLOUR;
-// let LINE_COLOUR = '#FFCAE9';
-// let LINE_COLOUR = '#75E4B3';
-let LINE_COLOUR = '#ff4d4d';
-// let LINE_COLOUR = '#FFB17A';
+let BACKGROUND_COLOUR;
+let CLOCK_COLOUR;
+let LINE_COLOUR;
+
+let FONT_ID;
+let THEME;
+let MODE;
+
+let h1;
+// console.log(h1);
+let p;
 
 let CANVAS_RATIO = 0.7; //if the page is opened in landscape mode (considered default)
 
 function preload() {
-    clocksConfig = loadJSON('./digitConfig.json');
+    configurations = loadJSON('./config.json');
 }
 
 /////////////////////////////////////////////////////////
@@ -26,9 +32,9 @@ function preload() {
 function setup() {
     if (windowHeight >= windowWidth) //if the page is opened in portrait mode
         CANVAS_RATIO = 0.9;
-    
+
     canv = createCanvas(windowWidth * CANVAS_RATIO, 0.75 * windowWidth * CANVAS_RATIO);
-    
+
     if (windowHeight <= windowWidth && windowHeight <= 0.75 * windowWidth) {
         // CANVAS_RATIO = 0.9;
         resizeCanvas(windowHeight * 1.33 * CANVAS_RATIO, windowHeight * CANVAS_RATIO);
@@ -47,31 +53,65 @@ function draw() {
     strokeWeight(0.5);
     rect(0, 0, width - 1, height - 1);
 
+    // if (frameCount % 5 === 0)
+    // LINE_COLOUR = [random(100, 255), random(100, 255), random(100, 255)];
+
     drawHours();
     drawMinutes();
     drawSeconds();
 }
 
-
-// function windowResized() {
-//     var x = (windowWidth - width) / 2;
-//     var y = (windowHeight - height) / 2;
-//     // canv.position(x, y);
-// }
-
 function initialization() {
     angleMode(DEGREES);
-    document.bgColor = BACKGROUND_COLOUR;
+    FONT_ID = 0;
+    clocksConfig = configurations.digit_font_styles[FONT_ID];
     setupHours();
     setupMinutes();
     setupSeconds();
+
+    MODE = 0;
+    THEME = 0;
+
+    h1 = select('#title')
+    p = select('#description')
+
+    setMode();
+    setTheme();
+
+
 
     canv.parent('clock');
 }
 
 function mousePressed() {
-    if (mouseButton === LEFT)
-        changeClockVisbility();
+    if (mouseButton === LEFT) {
+        if (mouseX > width / 2) {
+            if (mouseY > height / 2) {
+                THEME++;
+                setTheme();
+            } else {
+                MODE++;
+                setMode();
+            }
+        } else {
+            changeClockVisbility();
+        }
+    }
+}
+
+function setTheme() {
+    THEME = THEME % configurations.colour_themes.length;
+    LINE_COLOUR = configurations.colour_themes[THEME].LINE[MODE];
+}
+
+function setMode() {
+    MODE = MODE % configurations.modes.length;
+    CLOCK_COLOUR = configurations.modes[MODE].CLOCK;
+    BACKGROUND_COLOUR = configurations.modes[MODE].BACKGROUND;
+    setTheme();
+    document.bgColor = BACKGROUND_COLOUR;
+    h1.style('color', `rgb(${(1-MODE) * 255}, ${(1-MODE) * 255}, ${(1-MODE) * 255})`);
+    p.style('color', `rgb(${(1-MODE) * 255}, ${(1-MODE) * 255}, ${(1-MODE) * 255})`);
 }
 
 function changeClockVisbility() {
