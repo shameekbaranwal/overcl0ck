@@ -89,11 +89,11 @@ function mousePressed() {
             if (mouseY > height / 2 && mouseY < height) {
                 THEME++;
                 setTheme();
-            } else {
+            } else if (mouseY < height / 2 && mouseY > 0) {
                 MODE++;
                 setMode();
             }
-        } else {
+        } else if (mouseX < width / 2 && mouseX > 0) {
             changeClockVisbility();
         }
     }
