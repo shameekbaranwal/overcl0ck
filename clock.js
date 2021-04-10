@@ -120,10 +120,10 @@ class Clock {
     setLineStroke() {
         //if the hands are coinciding and facing up - i.e. the default position, then reduce its thickness
         if (this.currentAngles[0] % 360 === 0 && this.currentAngles[1] % 360 === 0) {
-            if (this.lineThickness < 0.5) {
-                this.lineThickness = 0.5;
+            if (this.lineThickness < normalize(0.5)) {
+                this.lineThickness = normalize(0.5);
             } else {
-                this.lineThickness -= 0.07;
+                this.lineThickness -= normalize(0.07);
             }
             if (CLOCKS_INVISIBLE) //a mode triggered by clicking the mouse
                 this.lineThickness = 0;
@@ -131,7 +131,7 @@ class Clock {
             if (this.lineThickness >= this.size / 15) {
                 this.lineThickness = this.size / 15;
             } else {
-                this.lineThickness += 0.1;
+                this.lineThickness += normalize(0.1);
             }
         }
         strokeWeight(this.lineThickness);
