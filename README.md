@@ -1,4 +1,4 @@
-# [overcl0ck]('https://overcl0ck.netlify.app')
+# [overcl0ck](https://overcl0ck.netlify.app "overcl0ck")
 A digital clock made of 360 analogue clocks.  
 Made using the p5.js library.
 
@@ -39,4 +39,4 @@ For a digital `2`, a `41` implies the first hand of the clock would be at a cloc
 * Add another font resembling the seven segment digit display.  
 
 
-Check out the latest release [here]('https://overcl0ck.netlify.app').
+Check out the latest release [here](https://overcl0ck.netlify.app "overcl0ck").
