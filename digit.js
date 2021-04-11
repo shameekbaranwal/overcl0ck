@@ -26,7 +26,7 @@ class Digit {
                     parentX: this.x,
                     parentY: this.y,
                     config: clocksConfig.data[n++], 
-                    incrementDivisor: 5 * this.speed,
+                    incrementDivisor: 5 / this.speed,
                 };
                 this.clocks.push(new Clock(state));
             }

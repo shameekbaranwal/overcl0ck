@@ -18,7 +18,6 @@ let THEME;
 let MODE;
 
 let h1;
-// console.log(h1);
 let p;
 
 let CANVAS_RATIO = 0.7; //if the page is opened in landscape mode (considered default)
@@ -26,8 +25,6 @@ let CANVAS_RATIO = 0.7; //if the page is opened in landscape mode (considered de
 function preload() {
     configurations = loadJSON('./config.json');
 }
-
-/////////////////////////////////////////////////////////
 
 function setup() {
     if (windowHeight >= windowWidth) //if the page is opened in portrait mode
@@ -49,7 +46,7 @@ function setup() {
 function draw() {
     background(BACKGROUND_COLOUR);
     noFill();
-    stroke(240);
+    stroke(240 * (1 - MODE));
     strokeWeight(0.5);
     rect(0, 0, width - 1, height - 1);
 
@@ -93,7 +90,7 @@ function mousePressed() {
                 MODE++;
                 setMode();
             }
-        } else if (mouseX < width / 2 && mouseX > 0) {
+        } else if (mouseX < width / 2 && mouseX > 0 && mouseY < height && mouseY > 0) {
             changeClockVisbility();
         }
     }
@@ -125,9 +122,9 @@ function setupHours() {
         size: normalize(27),
         rows: 10,
         columns: 6,
-        speed: 2.7, //right now, the lower this is, the faster the animation gets. Will refactor later.
+        speed: 0.4,
     }
-    // hr = 17; //debugging
+
     hrDigits[0] = new Digit(config); //10s digit of hour
     config.x = config.x + config.columns * config.size + normalize(15);
     hrDigits[1] = new Digit(config); //1s digit of hour
@@ -148,10 +145,9 @@ function setupMinutes() {
         size: normalize(27),
         rows: 10,
         columns: 6,
-        speed: 2, //right now, the lower this is, the faster the animation gets. Will refactor later.
+        speed: 0.5,
     }
 
-    // min = 52; // debugging
     minDigits.push(new Digit(config)); //10s digit of min
     config.x = config.x + config.columns * config.size + normalize(15);
     minDigits.push(new Digit(config)); //1s digit of min
@@ -172,10 +168,9 @@ function setupSeconds() {
         size: normalize(27),
         rows: 10,
         columns: 6,
-        speed: 0.5, //right now, the lower this is, the faster the animation gets. Will refactor later.
+        speed: 2, 
     }
 
-    // sec = 19; // debugging
     secDigits.push(new Digit(config)); //10s digit of sec
     config.x = config.x + config.columns * config.size + normalize(15);
     secDigits.push(new Digit(config)); //1s digit of sec

@@ -4,12 +4,12 @@
 }
 
 @font-face {
-    src: url(fonts/advanced_dot_digital-7.ttf);
+    src: url(text-fonts/advanced_dot_digital-7.ttf);
     font-family: dot;
 }
 
 @font-face {
-    src: url(fonts/CascadiaCode.ttf);
+    src: url(text-fonts/CascadiaCode.ttf);
     font-family: cascadia;
 }
 
